@@ -1,0 +1,46 @@
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js Todo List Tutorial</title>
+    <meta name="author" content="github.com/CayoSouza">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main id="app">
+        <header>
+            <h2>Vue.js Todo List</h2>
+            <form>
+                <input type="text" v-model="currentTodo" placeholder="Description" maxlength="500">
+                <button @click.prevent="addTodo">+</button>
+            </form>
+        </header>
+
+        <section>
+            <ol>
+                <li v-for="todo in filteredTodos" :key="todo.text" v-on:click="toggleTodo(todo)">
+                    <div>
+                        <input type="checkbox" v-bind:checked="todo.done">
+
+                        <label>
+                            <del v-if="todo.done">
+                                {{ todo.text }}
+                            </del>
+                            <span v-else>
+                          {{ todo.text }}
+                        </span>
+                        </label>
+                    </div>
+
+                    <img src="close-icon.png" @click="delTodo(todo)" alt="fechar">
+                </li>
+            </ol>
+        </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="todo.js"></script>
+
+</body>
+</html>
