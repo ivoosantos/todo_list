@@ -15,3 +15,5 @@ No console do gerenciador de pacotes, digite "update-database" para o entity ger
 No projeto do back-end tem uma pasta chamada "Migration", o entity usa ela para poder criar a tabela no banco,
 pois lá se encontra o script.
 O banco de dados utilizado foi o Postgresql usando o gerenciador de banco DBeaver.
+
+*Não esqueça de alterar a string de conexão no appsetting.json com sua senha do postgre.
