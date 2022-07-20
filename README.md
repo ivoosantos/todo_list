@@ -3,6 +3,7 @@ Desenvolvimento de lista de tarefas.
 
 # Utilizar o Vue.js
 $ npm install vue
+
 Para executar:
 $ npm run serve
 
