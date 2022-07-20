@@ -12,5 +12,7 @@ namespace todo_list.Repositories
         void Add(Todo todo);
         void Del(int id);
         Todo Get(int id);
+        void Finalizado(int id);
+        void Refazer(int id);
     }
 }

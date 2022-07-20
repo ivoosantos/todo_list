@@ -58,5 +58,39 @@ namespace todo_list.Controllers
 
             return Ok();
         }
+
+        [Route("finalizar/{id}", Name = "finalizar")]
+        [HttpPut]
+        public ActionResult Finalizar(int id)
+        {
+            var todo = _todoRepository.Get(id);
+
+            //if (todo.finalizado)
+            //    return Ok();
+
+            if (todo == null)
+                return NotFound();
+
+            _todoRepository.Finalizado(todo.id);
+
+            return Ok();
+        }
+
+        [Route("refazer/{id}", Name = "refazer")]
+        [HttpPut]
+        public ActionResult Refazer(int id)
+        {
+            var todo = _todoRepository.Get(id);
+
+            //if (todo.finalizado)
+            //    return Ok();
+
+            if (todo == null)
+                return NotFound();
+
+            _todoRepository.Refazer(todo.id);
+
+            return Ok();
+        }
     }
 }

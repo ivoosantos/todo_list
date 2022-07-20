@@ -25,6 +25,8 @@ namespace todo_list.Repositories
 
         public void Add(Todo todo)
         {
+            todo.id = LastId() + 1;
+
             _data.Add(todo);
             _data.SaveChanges();
         }
@@ -37,6 +39,14 @@ namespace todo_list.Repositories
             _data.SaveChanges();
         }
 
+        public void Finalizado(int id)
+        {
+            var todo = _data.Todos.Find(id);
+            todo.finalizado = true;
+            _data.Update(todo);
+            _data.SaveChanges();
+        }
+
         public Todo Get(int id)
         {
             return _data.Todos.Find(id);
@@ -46,6 +56,23 @@ namespace todo_list.Repositories
         {
             string query = $"select * from \"Todos\"";
             return _npgsql.Query<Todo>(query).ToList();
+        }
+
+        public void Refazer(int id)
+        {
+            var todo = _data.Todos.Find(id);
+            todo.finalizado = false;
+            _data.Update(todo);
+            _data.SaveChanges();
+        }
+
+        private int LastId()
+        {
+            int id = 0;
+            string query = "select t.id  from \"Todos\" t where t.id = (select max(t2.id) from \"Todos\" t2)";
+            var t = _npgsql.ExecuteScalar(query);
+            id = (int)t;
+            return id;
         }
     }
 }

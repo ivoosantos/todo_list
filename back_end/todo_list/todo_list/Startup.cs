@@ -41,6 +41,7 @@ namespace todo_list
             services.AddDbContext<DataContext>(options => options.UseNpgsql(connectionPostgre));
 
             services.AddScoped<ITodoRepository, TodoRepository>();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +54,7 @@ namespace todo_list
 
             app.UseHttpsRedirection();
 
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseRouting();
 
             app.UseAuthorization();
